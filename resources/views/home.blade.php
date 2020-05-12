@@ -8,13 +8,13 @@
 				<div class="card-header">Dashboard</div>
 
 				<div class="card-body">
-					@if (session('status'))
+					@auth
 						<div class="alert alert-success" role="alert">
 							{{ session('status') }}
+							You are logged in!
 						</div>
 					
-					You are logged in!
-					@endif
+					@endauth
 				</div>
 			</div>
 		</div>
