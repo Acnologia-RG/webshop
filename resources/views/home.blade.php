@@ -13,8 +13,8 @@
 							{{ session('status') }}
 							You are logged in!
 						</div>
-					
 					@endauth
+					<p>does this work?</p>
 				</div>
 			</div>
 		</div>
