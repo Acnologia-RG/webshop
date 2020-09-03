@@ -1,0 +1,18 @@
+<?php
+
+use Illuminate\Database\Seeder;
+use Carbon\Carbon;
+
+
+class UsersSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        //'created_at' => Carbon::now()
+    }
+}
