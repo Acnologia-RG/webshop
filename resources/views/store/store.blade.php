@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-{{$category_id=0}}
+@php($category_id = 0)
 
 @section('content')
 <h1>potato store</h1>
@@ -10,7 +10,7 @@
 	@foreach ($articles as $article)
 
 		@if ($article->category_id > $category_id)
-			<h1>{{$categories->category_name}}</h1>
+			<h1>{{$categories[($article->category_id)-1]->category_name}}</h1>
 		@endif
 
 		<section class="col-lg">
@@ -18,8 +18,8 @@
 		<p>{{ $article->price }}</p>
 		<p>{{ $article->description }}</p>
 		</section>
-		{{$category_id = $article->category_id}}
-
+		
+		@php($category_id = $article->category_id)
 	@endforeach
 	</div>
 </div>
