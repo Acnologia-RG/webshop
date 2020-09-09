@@ -13,7 +13,9 @@ class ArticleController extends Controller
         $article = Articles::where('articles.id', $id)
         ->join('categories', 'category_id', '=','categories.id')
         ->select('name', 'price', 'description', 'category_name')
-        ->get();
-		dd($article);
+        ->first();
+        //dd($article);
+        
+        return view('store/article', compact('article'));
     }
 }

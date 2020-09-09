@@ -25,6 +25,6 @@ Route::get('/store', 'storeController@index');
 
 Route::get('/article/{id}', 'ArticleController@index');
 
-Route::get('/Categories/{id}', 'CategoriesController@index');
+Route::get('/Category/{id}', 'CategoriesController@index');
 
 Route::get('/shoppingcart', 'shoppingcartController@index');

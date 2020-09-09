@@ -15,6 +15,6 @@ class CategoriesController extends Controller
 		//look at the results of $articles or $categories by putting them into the dd()
 		//dd();
 
-		return view('store/index', compact('articles','categories'));
+		return view('store/category', compact('articles','categories'));
 	}
 }
