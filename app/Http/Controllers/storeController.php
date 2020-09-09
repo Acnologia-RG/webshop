@@ -10,8 +10,11 @@ class storeController extends Controller
 {
     public function index()
 	{
-		$articles = Articles::all();
-		$categories = Categories::all();
-		return view('store/store', compact('articles','categories'));
+		$articles = Articles::join('categories', 'category_id', '=','categories.id')
+		->get();
+		//dd($articles); 
+		
+		
+		return view('store/store', compact('articles'));
 	}
 }

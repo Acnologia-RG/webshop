@@ -23,7 +23,7 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/store', 'storeController@index');
 
-Route::get('/articles', 'ArticleController@index');
+Route::get('/article/{id}', 'ArticleController@index');
 
 Route::get('/Categories/{id}', 'CategoriesController@index');
 

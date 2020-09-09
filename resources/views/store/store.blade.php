@@ -1,25 +1,25 @@
 @extends('layouts.app')
 
-@php($category_id = 0)
-
 @section('content')
 <h1>potato store</h1>
 
 <div class="container">
-	<div class="row">
-	@foreach ($articles as $article)
+	@foreach ()
+	<h1>{{$article->category_name}}</h1>
+	
+	
+		@foreach ($articles as $article)
 
-		@if ($article->category_id > $category_id)
-			<h1>{{$categories[($article->category_id)-1]->category_name}}</h1>
-		@endif
+			<div class="card" style="width: 18rem;">
+			<div class="card-body">
+			<h3 class="card-title">{{ $article->name }}</h3>
+			<p>{{ $article->price }}$</p>
+			<p class="card-text">{{ $article->description }}</p>
+			<a href="#" class="btn btn-primary">buy me</a>
+			</div>
+			</div>
 
-		<section class="col-lg">
-		<h1>{{ $article->name }}</h1>
-		<p>{{ $article->price }}</p>
-		<p>{{ $article->description }}</p>
-		</section>
-		
-		@php($category_id = $article->category_id)
+		@endforeach
 	@endforeach
 	</div>
 </div>
