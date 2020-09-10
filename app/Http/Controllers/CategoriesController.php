@@ -10,11 +10,11 @@ class CategoriesController extends Controller
 {
 	public function index($id)
 	{   
-		$categories = Categories::find($id);
+		$category = Categories::find($id);
 		$articles = Articles::where('category_id', $id)->get();
 		//look at the results of $articles or $categories by putting them into the dd()
 		//dd();
 
-		return view('store/category', compact('articles','categories'));
+		return view('store/category', compact('articles','category'));
 	}
 }
