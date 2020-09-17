@@ -15,6 +15,10 @@
 						</div>
 					@endauth
 					<p>does this work?</p>
+					@if (session()->has('cart')) {
+						<? var_dump(session('cart')) ?>
+					}
+					@endif
 				</div>
 			</div>
 		</div>

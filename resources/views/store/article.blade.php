@@ -4,11 +4,20 @@
 	<h1>potato store</h1>
 	<div class="card" style="width: 18rem;">
 		<div class="card-body">
-			<h3 class="card-title">{{ $article->name }}</h3>
+			<h2 class="card-title">{{ $article->name }}</h2>
 			<p>{{ $article->price }}€</p>
 			<p class="card-text">{{ $article->description }}</p>
-			<a href="article/{{$article->id}}" class="btn btn-secondary">buy how many of me?</a>
-			<input type="number" id="quantity" name="quantity" min="1" max="500" value="1">
+
+			<!-- still need to make this put it into the cart that i still need to make -->
+			<br>
+			@auth
+				<form action="{{url('/')}}/addToCart/{{ $article->id }}">
+				<h5>buy how many of me?</h5>
+					<input class="number" type="number" value="1" min="1" max='5000' name='qty'>
+					<input class="btn btn-secondary" type="submit" value="Add to cart">
+			@else
+				<p>please login to order items</p>
+			@endauth
 		</div>
 	</div>
 </div>

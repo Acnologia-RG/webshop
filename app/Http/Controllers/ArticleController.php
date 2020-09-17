@@ -12,7 +12,7 @@ class ArticleController extends Controller
 	{
         $article = Articles::where('articles.id', $id)
         ->join('categories', 'category_id', '=','categories.id')
-        ->select('name', 'price', 'description', 'category_name')
+        ->select('articles.id','name', 'price', 'description', 'category_name')
         ->first();
         //dd($article);
         
