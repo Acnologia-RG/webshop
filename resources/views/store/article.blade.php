@@ -18,6 +18,7 @@
 			@else
 				<p>please login to order items</p>
 			@endauth
+			<? var_dump(session('cart')) ?>
 		</div>
 	</div>
 </div>
