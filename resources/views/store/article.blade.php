@@ -18,7 +18,10 @@
 			@else
 				<p>please login to order items</p>
 			@endauth
-			<? var_dump(session('cart')) ?>
+			@if (session()->has('cart')) {
+				<? var_dump(session('cart')) ?>
+			}
+			@endif
 		</div>
 	</div>
 </div>

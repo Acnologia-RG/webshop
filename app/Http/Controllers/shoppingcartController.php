@@ -7,36 +7,34 @@ use App\Articles;
 
 class shoppingcartController extends Controller
 {
-	private $cart = array();
+	/*
+	public $cart = array();
 	
 	public function __construct()
 	{
-		var_dump(session('cart'));
-
 		if (session()->has('cart')){
 			$this->cart = session('cart');
-		} else {
-			session('cart');
-			$this->cart = session('cart');
 		}
+		var_dump(session('cart'));
 	}
 
 	public function addToCart($id)
 	{
 		var_dump($this->cart);
 		
-		$found=false;
-		echo 'bla';
+		$found = false;
+		//echo 'bla1';
 		foreach($this->cart as $key => $product) {
-			echo $product['id'];
+			//echo $product['id'];
 			if ($product['id'] == $id){
-				$found=true;
-				echo 'bla';
+				$found = true;
+				//echo 'bla2';
 				$this->cart[$key]['quantity'] = intval($_GET['qty']);
 			}
 		}
 
 		if ($found == false){
+			echo 'false?';
 			$article = Articles::where('id', $id)
 				->select('id','name','price')
 				->first();
@@ -48,15 +46,39 @@ class shoppingcartController extends Controller
 				'quantity' => intval($_GET['qty']));
 
 			array_push($this->cart, $product);
+			//var_dump($this->cart);
 		}
+		//session('cart');
 		session()->put('cart', $this->cart);
-		unset($this->cart);
+		var_dump(session('cart'));
+		//return redirect(url('/store'));
+	}
+	public function index()
+	{
+		//return view('shoppingCart/cart');
+		var_dump(session('cart'));
+	}
+	*/
+	
+	public function addToCart($id)
+	{
+		$article = Articles::where('id', $id)
+        ->select('id','name','price')
+		->first();
+		
+		$toAdd = array(
+			'id' => $article->id,
+			'name' => $article->name,
+			'price' => floatval($article->price),
+			'quantity' => intval($_GET['qty']));
+
+		session()->push('cart', $toAdd);
 		//dd(session('cart'));
 		return redirect(url('/store'));
 	}
 	public function index()
 	{
-		//return view('shoppingCart/cart');
-		dd(session('cart'));
+		return view('shoppingCart/cart');
+		//dd(session('cart'));
 	}
 }

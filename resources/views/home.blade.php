@@ -16,7 +16,7 @@
 					@endauth
 					<p>does this work?</p>
 					@if (session()->has('cart')) {
-						<? dd(session('cart')) ?>
+						<? var_dump(session('cart')) ?>
 					}
 					@endif
 				</div>
