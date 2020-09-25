@@ -19,7 +19,7 @@
 				<p>please login to order items</p>
 			@endauth
 			@if (session()->has('cart')) {
-				<? var_dump(session('cart')) ?>
+				<? dd(session('cart')) ?>
 			}
 			@endif
 		</div>

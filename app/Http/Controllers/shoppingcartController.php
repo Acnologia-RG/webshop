@@ -53,11 +53,6 @@ class shoppingcartController extends Controller
 		var_dump(session('cart'));
 		//return redirect(url('/store'));
 	}
-	public function index()
-	{
-		//return view('shoppingCart/cart');
-		var_dump(session('cart'));
-	}
 	*/
 	
 	public function addToCart($id)
@@ -73,8 +68,9 @@ class shoppingcartController extends Controller
 			'quantity' => intval($_GET['qty']));
 
 		session()->push('cart', $toAdd);
-		//dd(session('cart'));
-		return redirect(url('/store'));
+		session()->save();
+		dd(session('cart'));
+		//return redirect(url('/store'));
 	}
 	public function index()
 	{
