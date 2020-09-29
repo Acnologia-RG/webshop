@@ -72,6 +72,8 @@ class shoppingcartController extends Controller
 		dd(session('cart'));
 		//return redirect(url('/store'));
 	}
+
+	
 	public function index()
 	{
 		return view('shoppingCart/cart');
