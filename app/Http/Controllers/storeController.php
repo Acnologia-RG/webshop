@@ -14,7 +14,6 @@ class storeController extends Controller
 		$articles = Articles::all();
 		//dd($articles); 
 		
-		
 		return view('store/store', compact('articles', 'categories'));
 	}
 }

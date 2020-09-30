@@ -15,9 +15,11 @@
 						</div>
 					@endauth
 					<p>does this work?</p>
-					@if (session()->has('cart')) {
-						<? dd(session('cart')) ?>
-					}
+
+					@if (!session()->has('cart')) 
+						<p>there is no cart</p>
+					@else
+						{{ dd($value) }}
 					@endif
 				</div>
 			</div>

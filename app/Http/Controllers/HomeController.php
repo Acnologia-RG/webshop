@@ -13,6 +13,7 @@ class HomeController extends Controller
 	 */
 	public function index()
 	{
-		return view('home');
+		$value = session()->get('cart');
+		return view('home', compact('value'));
 	}
 }

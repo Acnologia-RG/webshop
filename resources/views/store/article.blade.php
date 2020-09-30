@@ -19,9 +19,8 @@
 				<p>please login to order items. <br>
 				you can login from the top right</p>
 			@endauth
-			@if (session()->has('cart')) {
+			@if (session()->has('cart'))
 				<? dd(session('cart')) ?>
-			}
 			@endif
 		</div>
 	</div>
