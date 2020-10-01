@@ -11,10 +11,14 @@
 			<!-- still need to make this put it into the cart that i still need to make -->
 			<br>
 			@auth
-				<form action="{{url('/')}}/addToCart/{{ $article->id }}">
+				<form action="{{url('/')}}/addToCart" method='POST'>
+				@csrf
+				@method('POST')
 				<h5>buy how many of me?</h5>
+					<input type="hidden" name='id' value="{{$article->id}}">
 					<input class="number" type="number" value="1" min="1" max='5000' name='qty'>
 					<input class="btn btn-secondary" type="submit" value="Add to cart">
+
 			@else
 				<p>please login to order items. <br>
 				you can login from the top right</p>

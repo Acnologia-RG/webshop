@@ -6,21 +6,21 @@ use Illuminate\Http\Request;
 use App\Articles;
 use App\Categories;
 
-class shoppingcart
+class shoppingCart
 {
-	public $cart;
+	protected $cart;
 	
-	public function __construct($request)
+	public function __construct()
 	{
-		if (!$request->session()->has('cart')){
-			$this->cart = NULL;
+		if (!session()->has('cart')){
+			$this->cart = [];
 		} else {
-			$this->cart = $request->session('cart');
+			$this->cart = session('cart');
 		}
 		//var_dump(session('cart'));
 	}
 
-	public function putIntoCart($request, $id)
+	public function putIntoCart($request)
 	{
 		//var_dump($this->cart);
 		
@@ -28,16 +28,16 @@ class shoppingcart
 		//echo 'bla1';
 		foreach($this->cart as $key => $product) {
 			//echo $product['id'];
-			if ($product['id'] == $id){
+			if ($product['id'] == $request->id){
 				$found = true;
 				//echo 'bla2';
-				$this->cart[$key]['quantity'] = intval($_GET['qty']);
+				$this->cart[$key]['quantity'] = intval($request->qty);
 			}
 		}
 
 		if ($found == false){
 			//echo 'false?';
-			$article = Articles::where('id', $id)
+			$article = Articles::where('id', $request->id)
 				->select('id','name','price')
 				->first();
 		
@@ -45,33 +45,16 @@ class shoppingcart
 				'id' => $article->id,
 				'name' => $article->name,
 				'price' => floatval($article->price),
-				'quantity' => intval($_GET['qty']));
+				'quantity' => intval($request->qty));
 
 			array_push($this->cart, $product);
 			//var_dump($this->cart);
 		}
-		$request->session()->put('cart', $this->cart);
+		$request->session()->put('cart', $this);
 		//var_dump(session('cart'));
-		return redirect(url('/store'));
 	}
-	
-	/*
-	public function addToCart(Request $request, $id)
+	public function getCart()
 	{
-		$article = Articles::where('id', $id)
-        ->select('id','name','price')
-		->first();
-		
-		$toAdd = array(
-			'id' => $article->id,
-			'name' => $article->name,
-			'price' => floatval($article->price),
-			'quantity' => intval($_GET['qty']));
-
-		$request->session()->push('cart', $toAdd);
-		$request->session()->save();
-		dd(session('cart'));
-		//return redirect(url('/store'));
+		return $this->cart;
 	}
-	*/
 }
