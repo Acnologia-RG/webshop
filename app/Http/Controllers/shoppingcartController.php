@@ -10,9 +10,12 @@ class shoppingcartController extends Controller
 {
 	public function index()
 	{
+		session('cart')->howMuchMoneys();
+
 		$macFuckingMuffin = session('cart')->getCart();
-		return view('shoppingCart/cart', compact('macFuckingMuffin'));
+		$moneysToGib = session('cart')->moneysToGib();
 		//dd(session('cart'));
+		return view('shoppingCart/cart', compact('macFuckingMuffin', 'moneysToGib'));
 	}
 
 	public function addToCart(Request $request)
@@ -22,6 +25,13 @@ class shoppingcartController extends Controller
            $cart = new shoppingCart($request);
         }
 		$cart->putIntoCart($request);
+		//dd(session('cart'));
+		return redirect(url('/shoppingcart'));
+	}
+
+	public function delete($id)
+	{
+		session('cart')->deleteItem($id);
 		//dd(session('cart'));
 		return redirect(url('/shoppingcart'));
 	}

@@ -9,6 +9,7 @@ use App\Categories;
 class shoppingCart
 {
 	protected $cart;
+	protected $totalMoneys = 0;
 	
 	public function __construct()
 	{
@@ -53,6 +54,31 @@ class shoppingCart
 		$request->session()->put('cart', $this);
 		//var_dump(session('cart'));
 	}
+
+	public function deleteItem($id)
+	{
+		foreach($this->cart as $key => $product) {
+			if ($product['id'] == $id){
+				unset($this->cart[$key]);
+			}
+		}
+	}
+
+	public function howMuchMoneys()
+	{
+		$moneys = 0;
+		foreach($this->cart as $product){
+			$moneys += $product['price'] * $product['quantity'];
+		}
+
+		$this->totalMoneys = $moneys;
+	}
+
+	public function moneysToGib()
+	{
+		return $this->totalMoneys;
+	}
+
 	public function getCart()
 	{
 		return $this->cart;

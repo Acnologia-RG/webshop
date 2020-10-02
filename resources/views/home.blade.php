@@ -15,12 +15,6 @@
 						</div>
 					@endauth
 					<p>does this work?</p>
-
-					@if (!session()->has('cart')) 
-						<p>there is no cart</p>
-					@else
-						{{ var_dump(session('cart')) }}
-					@endif
 				</div>
 			</div>
 		</div>

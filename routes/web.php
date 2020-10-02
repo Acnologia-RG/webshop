@@ -30,3 +30,5 @@ Route::get('/Category/{id}', 'CategoriesController@index');
 Route::get('/shoppingcart', 'shoppingcartController@index')->middleware('auth');
 
 Route::post('/addToCart', 'shoppingcartController@addToCart')->middleware('auth');
+
+Route::get('/delete/{id}', 'shoppingcartController@delete')->middleware('auth');

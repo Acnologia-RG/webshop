@@ -7,8 +7,7 @@
 			<h2 class="card-title">{{ $article->name }}</h2>
 			<p>{{ $article->price }}€</p>
 			<p class="card-text">{{ $article->description }}</p>
-
-			<!-- still need to make this put it into the cart that i still need to make -->
+			
 			<br>
 			@auth
 				<form action="{{url('/')}}/addToCart" method='POST'>
