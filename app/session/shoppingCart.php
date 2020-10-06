@@ -8,6 +8,15 @@ use App\Categories;
 
 class shoppingCart
 {
+	/*
+	this is the shopping cart model
+	its got 2 protected var's with a function to get them out of the shoppingCart(getters)
+	
+	__construct always gets executed
+	the construct looks if a session cart already exists
+	if so it fills $cart with that
+	if not it makes it into an empty array
+	*/
 	protected $cart;
 	protected $totalMoneys = 0;
 	
@@ -18,26 +27,23 @@ class shoppingCart
 		} else {
 			$this->cart = session('cart');
 		}
-		//var_dump(session('cart'));
 	}
 
+	/* putIntoCart
+	puts what i post into the cart or 
+	checks if its already there and changes the given quantity to the new given quantity(edit)
+	*/
 	public function putIntoCart($request)
 	{
-		//var_dump($this->cart);
-		
 		$found = false;
-		//echo 'bla1';
 		foreach($this->cart as $key => $product) {
-			//echo $product['id'];
 			if ($product['id'] == $request->id){
 				$found = true;
-				//echo 'bla2';
 				$this->cart[$key]['quantity'] = intval($request->qty);
 			}
 		}
 
 		if ($found == false){
-			//echo 'false?';
 			$article = Articles::where('id', $request->id)
 				->select('id','name','price')
 				->first();
@@ -49,12 +55,13 @@ class shoppingCart
 				'quantity' => intval($request->qty));
 
 			array_push($this->cart, $product);
-			//var_dump($this->cart);
 		}
 		$request->session()->put('cart', $this);
-		//var_dump(session('cart'));
 	}
 
+	/* deleteItem
+	deletes the item with the given id from the cart
+	*/
 	public function deleteItem($id)
 	{
 		foreach($this->cart as $key => $product) {
@@ -64,6 +71,9 @@ class shoppingCart
 		}
 	}
 
+	/*howMuchMoneys
+	calculates the total amount of money the user/costumer has to pay
+	*/
 	public function howMuchMoneys()
 	{
 		$moneys = 0;
@@ -74,11 +84,17 @@ class shoppingCart
 		$this->totalMoneys = $moneys;
 	}
 
-	public function moneysToGib()
+	/* moneysToGive 
+	getter for the total money
+	*/
+	public function moneysToGive()
 	{
 		return $this->totalMoneys;
 	}
 
+	/* getCart 
+	getter for the cart
+	*/
 	public function getCart()
 	{
 		return $this->cart;

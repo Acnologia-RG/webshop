@@ -8,16 +8,22 @@ use App\Articles;
 
 class shoppingcartController extends Controller
 {
+	/* index
+	returns the index page of the shopping cart which is the check cart page
+	*/
 	public function index()
 	{
 		session('cart')->howMuchMoneys();
 
 		$macFuckingMuffin = session('cart')->getCart();
-		$moneysToGib = session('cart')->moneysToGib();
-		//dd(session('cart'));
-		return view('shoppingCart/cart', compact('macFuckingMuffin', 'moneysToGib'));
+		$moneysToGive = session('cart')->moneysToGive();
+		return view('shoppingCart/cart', compact('macFuckingMuffin', 'moneysToGive'));
 	}
 
+	/* addToCart
+	sets stuff to get added to the cart or edit what was in there
+	and then redirects you to the cart so ya can see it has been added/edited
+	*/
 	public function addToCart(Request $request)
 	{
 		$cart = session()->get('cart');
@@ -25,14 +31,16 @@ class shoppingcartController extends Controller
            $cart = new shoppingCart($request);
         }
 		$cart->putIntoCart($request);
-		//dd(session('cart'));
 		return redirect(url('/shoppingcart'));
 	}
 
+	/*delete
+	makes the model delete the item with the given id
+	and then puts ya back to your cart so ya can see it has been deleted
+	*/
 	public function delete($id)
 	{
 		session('cart')->deleteItem($id);
-		//dd(session('cart'));
 		return redirect(url('/shoppingcart'));
 	}
 }

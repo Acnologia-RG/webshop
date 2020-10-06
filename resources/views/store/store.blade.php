@@ -2,7 +2,6 @@
 @section('content')
 
 <div class="container">
-	<h1>potato store</h1>
 	@foreach ($categories as $category)
 		<a href="Category/{{$category->id}}"><h1>{{$category->category_name}}</h1></a>
 		@foreach ($articles as $article)

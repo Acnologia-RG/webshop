@@ -8,11 +8,13 @@ use App\Categories;
 
 class storeController extends Controller
 {
+	/* index
+	returns the index page of the store page which is the page with all the articles you can put into your cart
+	*/
     public function index()
 	{
 		$categories = Categories::all();
 		$articles = Articles::all();
-		//dd($articles); 
 		
 		return view('store/store', compact('articles', 'categories'));
 	}

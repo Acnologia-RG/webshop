@@ -8,13 +8,15 @@ use App\Categories;
 
 class ArticleController extends Controller
 {
+	/* index
+	returns the index page of the article page which is the page with the article you requested to see from the store page
+	*/
     public function index($id)
 	{
         $article = Articles::where('articles.id', $id)
         ->join('categories', 'category_id', '=','categories.id')
         ->select('articles.id','name', 'price', 'description', 'category_name')
         ->first();
-        //dd($article);
         
         return view('store/article', compact('article'));
     }

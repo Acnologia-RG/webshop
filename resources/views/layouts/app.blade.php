@@ -77,6 +77,7 @@
 		</nav>
 
 		<main class="py-4">
+			<h1>potato store</h1>
 			@yield('content')
 		</main>
 	</div>

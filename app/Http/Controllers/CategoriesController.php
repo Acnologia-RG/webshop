@@ -8,12 +8,13 @@ use App\Categories;
 
 class CategoriesController extends Controller
 {
+	/* index
+	returns the index page of the category page which is the page with everything of the one requested category
+	*/
 	public function index($id)
 	{   
 		$category = Categories::find($id);
 		$articles = Articles::where('category_id', $id)->get();
-		//look at the results of $articles or $categories by putting them into the dd()
-		//dd();
 
 		return view('store/category', compact('articles','category'));
 	}
