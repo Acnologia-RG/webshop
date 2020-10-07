@@ -8,14 +8,14 @@
 			<!-- edit to place order -->
 			<br>
 			@auth
-				<form action="{{url('/')}}/placeOrder" method='POST'>
+				<form action="{{url('/placeOrder')}}" method='POST'>
 				@csrf
 				@method('POST')
-				<h5>buy how many of me?</h5>
-					<input type="hidden" name='id' value="{{  }}">
+					<h5>city name</h5>
 					<input class="text" type="text" name='location'>
+					<h5>address</h5>
 					<input class="text" type="text" name='address'>
-					<input class="btn btn-secondary" type="submit" value="Place the order">
+					<input class="btn btn-secondary" type="submit" value="Place order">
 			@else
 				<p>please login to order items. <br>
 				you can login from the top right</p>

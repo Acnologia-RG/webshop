@@ -21,8 +21,6 @@ class CategoriesController extends Controller
 
 	/* Categories
 	returns a page where ya can sort on Category
-
-	WIP
 	*/
 	public function categories()
 	{

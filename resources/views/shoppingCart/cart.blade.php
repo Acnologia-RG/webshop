@@ -20,8 +20,8 @@
 		</div>
 	</div>
 	@endforeach
-	<h3>total money to pay {{number_format($moneysToGive, 2)}} € <br> 
-	now give all the money</h3>
+	<a href="{{url('/order')}}"><h3>total money to pay {{number_format($moneysToGive, 2)}} € <br> 
+	now give all the money</h3></a>
 </div>
 
 @endsection

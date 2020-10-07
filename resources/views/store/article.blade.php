@@ -9,7 +9,7 @@
 			
 			<br>
 			@auth
-				<form action="{{url('/')}}/addToCart" method='POST'>
+				<form action="{{url('/addToCart')}}" method='POST'>
 				@csrf
 				@method('POST')
 				<h5>buy how many of me?</h5>

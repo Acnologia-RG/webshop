@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
 			$table->foreign('user_id')->references('id')->on('users');
 			$table->string('location');
 			$table->string('address');
+			$table->float('total_price', 10, 2);
             $table->timestamps();
         });
     }

@@ -99,4 +99,12 @@ class shoppingCart
 	{
 		return $this->cart;
 	}
+
+	/* emptyCart
+	empties the cart
+	*/
+	public function emptyCart()
+	{
+		$this->cart = [];
+	}
 }

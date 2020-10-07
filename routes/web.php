@@ -34,3 +34,7 @@ Route::get('/shoppingcart', 'shoppingcartController@index')->middleware('auth');
 Route::post('/addToCart', 'shoppingcartController@addToCart')->middleware('auth');
 
 Route::get('/delete/{id}', 'shoppingcartController@delete')->middleware('auth');
+
+Route::post('/placeOrder', 'shoppingcartController@placeOrder')->middleware('auth');
+
+Route::get('/order', 'shoppingcartController@order')->middleware('auth');
