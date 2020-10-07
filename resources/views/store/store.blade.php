@@ -3,7 +3,7 @@
 
 <div class="container">
 	@foreach ($categories as $category)
-		<a href="Category/{{$category->id}}"><h1>{{$category->category_name}}</h1></a>
+		<a href="category/{{$category->id}}"><h1>{{$category->category_name}}</h1></a>
 		@foreach ($articles as $article)
 			@if ($article->category_id == $category->id)
 				<div class="card" style="width: 18rem;">

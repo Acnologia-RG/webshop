@@ -25,7 +25,9 @@ Route::get('/store', 'storeController@index');
 
 Route::get('/article/{id}', 'ArticleController@index');
 
-Route::get('/Category/{id}', 'CategoriesController@index');
+Route::get('/category/{id}', 'CategoriesController@index');
+
+Route::get('/categories', 'CategoriesController@categories');
 
 Route::get('/shoppingcart', 'shoppingcartController@index')->middleware('auth');
 

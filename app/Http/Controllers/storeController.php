@@ -8,7 +8,7 @@ use App\Categories;
 
 class storeController extends Controller
 {
-	/* index
+	/* Articles index
 	returns the index page of the store page which is the page with all the articles you can put into your cart
 	*/
     public function index()

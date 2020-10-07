@@ -8,7 +8,7 @@ use App\Categories;
 
 class ArticleController extends Controller
 {
-	/* index
+	/* article index
 	returns the index page of the article page which is the page with the article you requested to see from the store page
 	*/
     public function index($id)

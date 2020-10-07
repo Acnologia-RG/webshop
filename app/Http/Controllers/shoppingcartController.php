@@ -8,7 +8,7 @@ use App\Articles;
 
 class shoppingcartController extends Controller
 {
-	/* index
+	/* your cart index
 	returns the index page of the shopping cart which is the check cart page
 	*/
 	public function index()
