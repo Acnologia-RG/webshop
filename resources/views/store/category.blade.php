@@ -2,8 +2,9 @@
 @section('content')
 <div class="container">
 	<h1>All the {{ $category->category_name }}</h1>
+	<div class= "row">
 	@foreach ($articles as $article)
-		<div class="card" style="width: 18rem;">
+		<div class="card" style="width: 33.3333%;">
 			<div class="card-body">
 				<h3 class="card-title">{{ $article->name }}</h3>
 				<p>{{ $article->price }}€</p>
@@ -12,5 +13,6 @@
 			</div>
 		</div>
 	@endforeach
+	</div>
 </div>
 @endsection

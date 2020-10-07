@@ -39,9 +39,6 @@
 					</ul>
 
 					<!-- Right Side Of Navbar -->
-					@auth
-					<a class='float-right' href="{{ url('/shoppingcart') }}">your cart</a>
-					@endauth
 					<ul class="navbar-nav ml-auto">
 						<!-- Authentication Links -->
 						@guest
@@ -53,7 +50,10 @@
 									<a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
 								</li>
 							@endif
-						@else
+						@endguest
+						@auth
+							<li><a class="nav-link" href="{{ url('/shoppingcart') }}">Your cart</a></li>
+							<li><a class="nav-link" href="{{ url('/placedOrders') }}">Orders</a></li>
 							<li class="nav-item dropdown">
 								<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
 									{{ Auth::user()->name }} <span class="caret"></span>
@@ -71,14 +71,14 @@
 									</form>
 								</div>
 							</li>
-						@endguest
+						@endauth
 					</ul>
 				</div>
 			</div>
 		</nav>
 
 		<main class="py-4">
-			<h1>potato store</h1>
+			<h1>Potato Store</h1>
 			@yield('content')
 		</main>
 	</div>
