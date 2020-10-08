@@ -54,7 +54,6 @@ class shoppingcartController extends Controller
 	*/
 	public function placeOrder(Request $request)
 	{
-		
 		$macFuckingMuffin = session('cart')->getCart();
 		$moneysToGive = session('cart')->moneysToGive();
 
@@ -63,7 +62,7 @@ class shoppingcartController extends Controller
 			'address' => 'required',
 			'location' => 'required'
 		]);
-		
+
 		// makes a new order with the given values using the fillable
 		$newOrder = new Orders($validatedData['address'], $validatedData['location'], $moneysToGive, Auth::user()->id);
         $newOrder->save();

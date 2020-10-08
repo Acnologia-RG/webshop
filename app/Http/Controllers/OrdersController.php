@@ -21,18 +21,23 @@ class OrdersController extends Controller
 
 	/* show 
 	shows details about the selected order
-	WIP
 	*/
 	public function show($id) {
-        $order = Orders::find($id);
-        $items = $order->articles()->withPivot('amount')->get();
-        $amount = [];
+		$user = Auth::user()->id;
+		$order = Orders::find($id);
+		if ($user == $order->user_id) {
+			$items = $order->articles()->withPivot('amount')->get();
+			$amount = [];
 
-        foreach ($items as $item) {
-           array_push($amount, $item->pivot->amount);
-        }
+			foreach ($items as $item) {
+			array_push($amount, $item->pivot->amount);
+			}
 
-		dd($items, $amount, $order);
-        return view("/placedOrdersDetails", compact('items', 'amount', 'order'));
+			return view("/store/placedOrdersDetails", compact('items', 'amount', 'order'));
+		} else {
+			$orders = Orders::all()->where('user_id', Auth::user()->id);
+
+			return view('/store/placedOrders', compact('orders'));
+		}
     }
 }
