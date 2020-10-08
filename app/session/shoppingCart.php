@@ -101,7 +101,7 @@ class shoppingCart
 	}
 
 	/* emptyCart
-	empties the cart
+	empties the cart for after placing an order
 	*/
 	public function emptyCart()
 	{

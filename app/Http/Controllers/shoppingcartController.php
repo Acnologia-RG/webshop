@@ -13,12 +13,15 @@ class shoppingcartController extends Controller
 	/* your cart index
 	returns the index page of the shopping cart which is the check cart page
 	*/
-	public function index()
+	public function index(Request $request)
 	{
-		session('cart')->howMuchMoneys();
-
-		$macFuckingMuffin = session('cart')->getCart();
-		$moneysToGive = session('cart')->moneysToGive();
+		$cart = session()->get('cart');
+        if ($cart == null) {
+           $cart = new shoppingCart($request);
+        }
+		$cart->howMuchMoneys();
+		$macFuckingMuffin = $cart->getCart();
+		$moneysToGive = $cart->moneysToGive();
 		return view('shoppingCart/cart', compact('macFuckingMuffin', 'moneysToGive'));
 	}
 
