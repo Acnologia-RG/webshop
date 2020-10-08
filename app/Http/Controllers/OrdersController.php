@@ -25,7 +25,7 @@ class OrdersController extends Controller
 	public function show($id) {
 		$user = Auth::user()->id;
 		$order = Orders::find($id);
-		if ($order == null) {
+		if ($order == null || $user == null) {
 			return redirect(url('/placedOrders'));
 
 		} elseif ($user == $order->user_id) {
