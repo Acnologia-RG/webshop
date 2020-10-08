@@ -62,10 +62,15 @@ class shoppingcartController extends Controller
 			'address' => 'required',
 			'location' => 'required'
 		]);
-
+		
 		// makes a new order with the given values using the fillable
-		$newOrder = new Orders($validatedData['address'], $validatedData['location'], $moneysToGive, Auth::user()->id);
-        $newOrder->save();
+		$newOrder = new Orders();
+		$newOrder->address = $validatedData['address'];
+		$newOrder->location = $validatedData['location'];
+        $newOrder->total_price = $moneysToGive;
+        $newOrder->user_id = Auth::user()->id;
+		
+		$newOrder->save();
 
 		// puts all the items in the articles_orders table linked to the order_id
         foreach ($macFuckingMuffin as $cartItem) {

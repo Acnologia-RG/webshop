@@ -25,7 +25,10 @@ class OrdersController extends Controller
 	public function show($id) {
 		$user = Auth::user()->id;
 		$order = Orders::find($id);
-		if ($user == $order->user_id) {
+		if ($order == null) {
+			return redirect(url('/placedOrders'));
+
+		} elseif ($user == $order->user_id) {
 			$items = $order->articles()->withPivot('amount')->get();
 			$amount = [];
 
@@ -34,10 +37,9 @@ class OrdersController extends Controller
 			}
 
 			return view("/store/placedOrdersDetails", compact('items', 'amount', 'order'));
-		} else {
-			$orders = Orders::all()->where('user_id', Auth::user()->id);
 
-			return view('/store/placedOrders', compact('orders'));
+		} else {
+			return redirect(url('/placedOrders'));
 		}
     }
 }
