@@ -22,9 +22,11 @@ class OrdersController extends Controller
 	/* show 
 	shows details about the selected order
 	*/
-	public function show($id) {
+	public function show($id) 
+	{
 		$user = Auth::user()->id;
 		$order = Orders::find($id);
+		
 		if ($order == null || $user == null) {
 			return redirect(url('/placedOrders'));
 
