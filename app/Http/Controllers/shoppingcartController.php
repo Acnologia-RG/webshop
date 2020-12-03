@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
@@ -13,16 +12,12 @@ class shoppingcartController extends Controller
 	/* your cart index
 	returns the index page of the shopping cart which is the check cart page
 	*/
-	public function index(Request $request)
+	public function index()
 	{
-		$cart = session()->get('cart');
-        if ($cart == null) {
-           $cart = new shoppingCart($request);
-        }
-		$cart->howMuchMoneys();
-		$macFuckingMuffin = $cart->getCart();
-		$moneysToGive = $cart->moneysToGive();
-		return view('shoppingCart/cart', compact('macFuckingMuffin', 'moneysToGive'));
+		$cart = new shoppingCart();
+		$yourCart = $cart->getCart();
+		$totalPrice = $cart->totalPrice();
+		return view('shoppingCart/cart', compact('yourCart', 'totalPrice'));
 	}
 
 	/* addToCart
@@ -31,11 +26,10 @@ class shoppingcartController extends Controller
 	*/
 	public function addToCart(Request $request)
 	{
-		$cart = session()->get('cart');
-        if ($cart == null) {
-           $cart = new shoppingCart($request);
-        }
-		$cart->putIntoCart($request);
+		$id = $request->id;
+		$qty = $request->qty;
+		$cart = new shoppingCart();
+		$cart->putIntoCart($id, $qty);
 		return redirect(url('/shoppingcart'));
 	}
 
@@ -45,7 +39,8 @@ class shoppingcartController extends Controller
 	*/
 	public function delete($id)
 	{
-		session('cart')->deleteItem($id);
+		$cart = new shoppingCart();
+		$cart->deleteItem($id);
 		return redirect(url('/shoppingcart'));
 	}
 
@@ -54,8 +49,9 @@ class shoppingcartController extends Controller
 	*/
 	public function placeOrder(Request $request)
 	{
-		$macFuckingMuffin = session('cart')->getCart();
-		$moneysToGive = session('cart')->moneysToGive();
+		$cart = new shoppingCart();
+		$cart->getCart();
+		$cart->totalPrice();
 
 		//looks if everything is there and checks if its a valid thing
 		$validatedData = $request->validate([
@@ -67,17 +63,17 @@ class shoppingcartController extends Controller
 		$newOrder = new Orders();
 		$newOrder->address = $validatedData['address'];
 		$newOrder->location = $validatedData['location'];
-        $newOrder->total_price = $moneysToGive;
+        $newOrder->total_price = $totalPrice;
         $newOrder->user_id = Auth::user()->id;
 		
 		$newOrder->save();
 
 		// puts all the items in the articles_orders table linked to the order_id
-        foreach ($macFuckingMuffin as $cartItem) {
+        foreach ($yourCart as $cartItem) {
 			$newOrder->articles()->attach($cartItem['id'], ["amount" => $cartItem['quantity']]);
 		}
 
-		session('cart')->emptyCart();
+		$cart->emptyCart();
 		return redirect(url('/home'));
 	}
 

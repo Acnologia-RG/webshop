@@ -18,7 +18,7 @@ class shoppingCart
 	if not it makes it into an empty array
 	*/
 	protected $cart;
-	protected $totalMoneys = 0;
+	protected $totalPrice = 0;
 	
 	public function __construct()
 	{
@@ -33,26 +33,27 @@ class shoppingCart
 	puts what i post into the cart or 
 	checks if its already there and changes the given quantity to the new given quantity(edit)
 	*/
-	public function putIntoCart($request)
+	public function putIntoCart($id, $qty)
 	{
 		$found = false;
 		foreach($this->cart as $key => $product) {
-			if ($product['id'] == $request->id){
+			//dd($product);
+			if ($product['id'] == $id){
 				$found = true;
-				$this->cart[$key]['quantity'] = intval($request->qty);
+				$this->cart[$key]['quantity'] = intval($qty);
 			}
 		}
 
 		if ($found == false){
-			$article = Articles::where('id', $request->id)
+			$article = Articles::where('id', $id)
 				->select('id','name','price')
 				->first();
 		
 			$product = array(
-				'id' => $article->id,
+				'id' => $id,
 				'name' => $article->name,
 				'price' => floatval($article->price),
-				'quantity' => intval($request->qty));
+				'quantity' => intval($qty));
 
 			array_push($this->cart, $product);
 		}
@@ -71,25 +72,26 @@ class shoppingCart
 		}
 	}
 
-	/*howMuchMoneys
+	/*priceCalc
 	calculates the total amount of money the user/costumer has to pay
 	*/
-	public function howMuchMoneys()
+	public function priceCalc()
 	{
 		$moneys = 0;
 		foreach($this->cart as $product){
 			$moneys += $product['price'] * $product['quantity'];
 		}
 
-		$this->totalMoneys = $moneys;
+		$this->totalPrice = $moneys;
 	}
 
-	/* moneysToGive 
+	/* totalPrice 
 	getter for the total money
 	*/
-	public function moneysToGive()
+	public function totalPrice()
 	{
-		return $this->totalMoneys;
+		$this->priceCalc();
+		return $this->totalPrice;
 	}
 
 	/* getCart 

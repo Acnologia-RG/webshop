@@ -1,0 +1,8 @@
+studie elequant relation
+
+	belongsTo 
+	belongsToMany
+	
+more professional/fitting var/const names
+
+ERD explanation

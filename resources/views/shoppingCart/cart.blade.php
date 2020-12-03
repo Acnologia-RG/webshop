@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
 	<h2>your cart items</h2>
-	@foreach ($macFuckingMuffin as $cart)
+	@foreach ($yourCart as $cart)
 	<div class="card" style="width: 18rem;">
 		<div class="card-body">
 			<h3 class="card-title">name: {{ $cart["name"] }}</h3>
@@ -20,7 +20,7 @@
 		</div>
 	</div>
 	@endforeach
-	<a href="{{url('/order')}}"><h3>total money to pay {{number_format($moneysToGive, 2)}} € <br> 
+	<a href="{{url('/order')}}"><h3>total price {{number_format($totalPrice, 2)}} € <br> 
 	now give all the money</h3></a>
 </div>
 
