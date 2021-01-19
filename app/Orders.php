@@ -9,7 +9,7 @@ class Orders extends Model
 	/* Articles
 	makes Orders belong to Articles
 	*/
-    public function Articles()
+	public function Articles()
 	{
 		return $this->belongsToMany('App\Articles');
 	}

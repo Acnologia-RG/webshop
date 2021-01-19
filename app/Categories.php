@@ -9,8 +9,8 @@ class Categories extends Model
 	/* Articles
 	makes Categories belong to Articles
 	*/
-    public function Articles()
-    {
-        return $this->belongsTo('App\Articles');
-    }
+	public function Articles()
+	{
+		return $this->belongsTo('App\Articles');
+	}
 }

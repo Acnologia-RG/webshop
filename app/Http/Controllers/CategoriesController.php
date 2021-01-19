@@ -12,7 +12,7 @@ class CategoriesController extends Controller
 	returns the index page of the category page which is the page with everything of the one requested category
 	*/
 	public function index($id)
-	{   
+	{
 		$category = Categories::find($id);
 		$articles = Articles::where('category_id', $id)->get();
 

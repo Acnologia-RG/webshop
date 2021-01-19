@@ -50,8 +50,8 @@ class shoppingcartController extends Controller
 	public function placeOrder(Request $request)
 	{
 		$cart = new shoppingCart();
-		$cart->getCart();
-		$cart->totalPrice();
+		$yourCart = $cart->getCart();
+		$totalPrice = $cart->totalPrice();
 
 		//looks if everything is there and checks if its a valid thing
 		$validatedData = $request->validate([
@@ -63,13 +63,13 @@ class shoppingcartController extends Controller
 		$newOrder = new Orders();
 		$newOrder->address = $validatedData['address'];
 		$newOrder->location = $validatedData['location'];
-        $newOrder->total_price = $totalPrice;
-        $newOrder->user_id = Auth::user()->id;
+		$newOrder->total_price = $totalPrice;
+		$newOrder->user_id = Auth::user()->id;
 		
 		$newOrder->save();
 
 		// puts all the items in the articles_orders table linked to the order_id
-        foreach ($yourCart as $cartItem) {
+		foreach ($yourCart as $cartItem) {
 			$newOrder->articles()->attach($cartItem['id'], ["amount" => $cartItem['quantity']]);
 		}
 

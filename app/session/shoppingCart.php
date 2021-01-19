@@ -1,5 +1,4 @@
 <?php
-
 namespace App\session;
 
 use Illuminate\Http\Request;
@@ -18,14 +17,14 @@ class shoppingCart
 	if not it makes it into an empty array
 	*/
 	protected $cart;
-	protected $totalPrice = 0;
+	private $totalPrice = 0;
 	
 	public function __construct()
 	{
 		if (!session()->has('cart')){
 			$this->cart = [];
 		} else {
-			$this->cart = session('cart');
+			$this->cart = session('cart')->cart;
 		}
 	}
 
@@ -37,7 +36,6 @@ class shoppingCart
 	{
 		$found = false;
 		foreach($this->cart as $key => $product) {
-			//dd($product);
 			if ($product['id'] == $id){
 				$found = true;
 				$this->cart[$key]['quantity'] = intval($qty);
@@ -46,7 +44,7 @@ class shoppingCart
 
 		if ($found == false){
 			$article = Articles::where('id', $id)
-				->select('id','name','price')
+				->select('name','price')
 				->first();
 		
 			$product = array(
@@ -57,7 +55,7 @@ class shoppingCart
 
 			array_push($this->cart, $product);
 		}
-		$request->session()->put('cart', $this);
+		session()->put('cart', $this);
 	}
 
 	/* deleteItem
@@ -68,6 +66,7 @@ class shoppingCart
 		foreach($this->cart as $key => $product) {
 			if ($product['id'] == $id){
 				unset($this->cart[$key]);
+				session()->put('cart', $this);
 			}
 		}
 	}
@@ -77,12 +76,12 @@ class shoppingCart
 	*/
 	public function priceCalc()
 	{
-		$moneys = 0;
+		$total = 0;
 		foreach($this->cart as $product){
-			$moneys += $product['price'] * $product['quantity'];
+			$total += $product['price'] * $product['quantity'];
 		}
 
-		$this->totalPrice = $moneys;
+		$this->totalPrice = $total;
 	}
 
 	/* totalPrice 
@@ -107,6 +106,6 @@ class shoppingCart
 	*/
 	public function emptyCart()
 	{
-		$this->cart = [];
+		session()->forget('cart');
 	}
 }
